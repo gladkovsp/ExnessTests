@@ -1,34 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 namespace Exness.Models
 {
+	[DataContract]
 	public class Vendor
 	{
-		[Required]
-		[JsonProperty("id", Order = 1)]
+		[DataMember(Name = "id", Order = 1)]
 		public Guid Id { get; set; }
 
-		[Required]
-		[JsonProperty("name", Order = 2)]
+		[DataMember(Name = "name", Order = 2)]
 		public string Name { get; set; }
 
-		[Required]
-		[JsonProperty("rating", Order = 3)]
-		public int Rating { get; set; } 
+		[DataMember(Name = "rating", Order = 3)]
+		public int Rating { get; set; }
 
-		[JsonProperty("categories", Order = 4)]
+		[DataMember(Name = "categories", Order = 4)]
 		public  virtual ICollection<Category> Categories { get; set; }
-
-		public Vendor()
-		{
-			Categories = new List<Category>();
-		}
-
+		
 		public override bool Equals(object obj)
 		{
 			if (obj == null) return false;
@@ -41,10 +32,7 @@ namespace Exness.Models
 		{
 			return Id.Equals(vendor.Id)
 				   && Name.Equals(vendor.Name)
-				   && Rating.Equals(vendor.Rating)
-				   && !Categories.Except(vendor.Categories).Any();
+				   && Rating.Equals(vendor.Rating);
 		}
-
-
 	}
 }

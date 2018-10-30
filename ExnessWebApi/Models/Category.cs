@@ -1,18 +1,17 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 namespace Exness.Models
 {
+	[DataContract]
 	public class Category
 	{
-		[Required]
-		[JsonProperty("id", Order = 1)]
+		[DataMember(Name = "id", Order = 1)]
 		public Guid Id { get; set; }
 
-		[Required]
-		[JsonProperty("name", Order = 2)]
+		[DataMember(Name = "name", Order = 2)]
 		public string Name { get; set; }
 
 		[JsonIgnore]
